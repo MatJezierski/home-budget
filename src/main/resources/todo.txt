@@ -1,0 +1,28 @@
+Domowy budżet:
+    - kategorie wydatków (crud)
+    - źródła dochodów (crud)
+    - wydatki (crud)
+    - dochody (crud)
+
+    - logowanie
+    - rejestracja (mail)
+    - różne role (user/admin)
+
+    - definiowanie limitów (dzienny/miesięczny)
+    - możliwość definiowania celów oszczędnościowych
+    - możliwość definiowania powiadomień
+
+    - listy zakupów - realtime - kilka osób widzi/odznacza
+
+    - powiadomienia/raporty:
+        - dzienne wydatki
+        - raport kiedy osiągniemy cel oszczędzania
+        - list gratulacyjny - cel osiągnięty
+        - wykresy - dane z podziałem na: kategorie/jednostki czasu/saldo
+        - podział wydatków per osoba
+
+    - statystyki użycia aplikacji
+
+    - powiadomienia (mailowe) o stałych wydatkach i możliwość ich potwierdzenia
+
+    - ładny interfejs
