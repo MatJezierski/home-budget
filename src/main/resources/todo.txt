@@ -1,8 +1,15 @@
 Domowy budżet:
     - kategorie wydatków (crud)
+        - model
+        - forma + obsługa
+        -
     - źródła dochodów (crud)
+
     - wydatki (crud)
+
     - dochody (crud)
+
+    - testy
 
     - logowanie
     - rejestracja (mail)
@@ -26,3 +33,9 @@ Domowy budżet:
     - powiadomienia (mailowe) o stałych wydatkach i możliwość ich potwierdzenia
 
     - ładny interfejs
+
+    - dto
+
+    - tabele audytowe
+
+    - audyt kodu
