@@ -36,4 +36,9 @@ public class ExpenseCategoryServiceImpl implements ExpenseCategoryService {
         return result;
     }
 
+    @Override
+    public boolean saveCategory(ExpenseCategory expenseCategory) {
+        ExpenseCategory savedCategory = dataRepository.save(expenseCategory);
+        return null != savedCategory.getId();
+    }
 }

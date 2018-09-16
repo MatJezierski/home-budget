@@ -8,5 +8,5 @@ public interface ExpenseCategoryController {
 
     String allCategories(Model categories);
 
-    public String addCategory(@ModelAttribute ExpenseCategory expenseCategory);
+    public String addCategory(Model category);
 }
