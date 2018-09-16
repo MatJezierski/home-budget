@@ -21,6 +21,7 @@ public class ExpenseCategory {
     private boolean deleted;
 
     public ExpenseCategory() {
+        creationDateTime = LocalDateTime.now();
     }
 
     public ExpenseCategory(LocalDateTime creationDateTime, String categoryName, boolean deleted) {

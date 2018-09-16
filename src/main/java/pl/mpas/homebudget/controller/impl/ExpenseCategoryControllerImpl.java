@@ -43,9 +43,9 @@ public class ExpenseCategoryControllerImpl implements ExpenseCategoryController 
                 expenseCategory, pushedButton);
 
         if ("save".equalsIgnoreCase(pushedButton)){
-            categoryService.saveCategory(expenseCategory);
+            categoryService.saveCategory(expenseCategory); // jeśli "Save", to zapisz i dodaj do wszystkich kategorii
         }
-        return "redirect:/category/all";
+        return "redirect:/category/all"; //jeśli "Cancel", to powróć do wszystkich kategorii
     }
 
     @GetMapping("/category/add")
