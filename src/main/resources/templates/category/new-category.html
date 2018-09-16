@@ -1,10 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>New expense category</title>
 </head>
 <body>
-<p> Add new expense category </p>
+<p><b>Add new expense category</b></p>
+<form action="#" th:action="@{/category/save}" th:object="${category}" method="post">
+    <input type="hidden" th:field="*{id}"/>
+    <p>Category name: <input type="text" th:field="*{categoryName}"/></p>
+    <p><input type="submit" name="pressed-button" value="Save"/>
+        <input type="submit" name="pressed-button" value="Cancel"/>
+        <input type="reset" value="Reset"/></p>
+</form>
 </body>
 </html>

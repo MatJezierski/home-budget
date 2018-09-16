@@ -38,11 +38,11 @@ public class ExpenseCategoryControllerImpl implements ExpenseCategoryController 
 
     @PostMapping("/category/save")
     public String saveCategory(@ModelAttribute ExpenseCategory expenseCategory,
-                               @RequestParam String pushedButton) {
+                               @RequestParam(name = "pressed-button") String pushedButton) {
         logger.info("saveCategory(), expenseCategory: {}, pushedButton: ()",
                 expenseCategory, pushedButton);
 
-        if ("save".equals(pushedButton)){
+        if ("save".equalsIgnoreCase(pushedButton)){
             categoryService.saveCategory(expenseCategory);
         }
         return "redirect:/category/all";
