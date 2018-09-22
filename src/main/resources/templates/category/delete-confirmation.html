@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete confirmation</title>
+</head>
+<body>
+<h2>Do you really want to delete</h2>
+<h2 th:text="${categoryToAsk.categoryName} + '?'">category</h2>
+<a th:href="@{'/category/delete/' + ${categoryToAsk.id}}">Yes</a>&nbsp;&nbsp;<a th:href="@{/category/all}">No</a>
+</body>
+</html>

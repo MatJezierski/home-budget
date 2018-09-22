@@ -1,9 +1,5 @@
 package pl.mpas.homebudget.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -11,7 +7,7 @@ import java.time.LocalDateTime;
 //@Entity
 public class Expense {
 
-  //  @Id
+    //  @Id
     //@GeneratedValue
     private Long id;
 

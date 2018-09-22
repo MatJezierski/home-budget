@@ -9,4 +9,8 @@ public interface ExpenseCategoryRepository extends CrudRepository <ExpenseCatego
 
     // DAO = Data Access Object
 
+    // @Repository ze Spring-data  tworzy dynamicznie klasę (bo ta adnotacja jest nad interfejsem),
+    // która obsługuje bazę danych wykonując zapytania, które generuje na podstawie nazw metod tego interfejsu.
+    // Powoduje też, że wyjątki związane z bazą danych są zamieniane na Springowe DataAccessExceptions.
+
 }
