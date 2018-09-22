@@ -8,6 +8,9 @@ Domowy budżet:
     - wydatki (crud)
 
     - dochody (crud)
+*
+
+    - strona do obsługi błędów
 
     - testy
 
