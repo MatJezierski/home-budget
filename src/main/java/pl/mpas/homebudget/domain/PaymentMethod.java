@@ -10,10 +10,10 @@ public enum PaymentMethod {
     CASH,
     DEBIT,
     CREDIT,
-    ONLINE_PAYMENT
+    ONLINE_PAYMENT;
 
     public static List<PaymentMethod> getAllPaymentMethods() {
-        Arrays.stream(PaymentMethod.values())
+        return Arrays.stream(PaymentMethod.values())
                 .sorted(Comparator.comparing(Enum::toString))
                 .collect(Collectors.toList());
 
