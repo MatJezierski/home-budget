@@ -37,7 +37,8 @@ public class Expense {
     public Expense() {
     }
 
-    public Expense(String expenseTitle, PaymentMethod method, String expensePlace, BigDecimal expenseAmount, ExpenseCategory category, LocalDate expenseDate, LocalDateTime creationDateTime, boolean deleted) {
+    public Expense(String expenseTitle, PaymentMethod method, String expensePlace, BigDecimal expenseAmount,
+                   ExpenseCategory category, LocalDate expenseDate, LocalDateTime creationDateTime, boolean deleted) {
         //this.id = id;
         this.expenseTitle = expenseTitle;
         this.method = method;

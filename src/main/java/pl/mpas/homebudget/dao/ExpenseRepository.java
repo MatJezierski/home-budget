@@ -1,4 +1,9 @@
 package pl.mpas.homebudget.dao;
 
-public interface ExpenseRepository {
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+import pl.mpas.homebudget.domain.Expense;
+
+@Repository
+public interface ExpenseRepository extends CrudRepository <Expense, Long> {
 }
