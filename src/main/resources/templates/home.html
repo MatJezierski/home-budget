@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"/>
     <title>Home budget</title>
+    <link rel="stylesheet" th:href="@{/assets/style.css}"/>
 </head>
 <body>
-    <p> Home budget </p>
-    <a href="#" th:href="@{/category/categories-all.html}">Kategorie wydatków</a>&nbsp;&nbsp;
-    <a href="#" th:href="@{/}">Wydatki</a>&nbsp;&nbsp;
-    <a href="#" th:href="@{/}">Przychody</a>&nbsp;&nbsp;
-    <a href="#" th:href="@{/}">Import/eksport</a>
+    <h1>Home budget</h1>
+    <p> Welcome to Home Budget application! </p>
+    <img th:src="@{/assets/happy_dollar.jpg.jpg}"/>
+    <p><a href="#" th:href="@{/category/all}">Przejdź do kategorii wydatków</a></p>
+    <p><a href="#" th:href="@{/expense/all}">Przejdź do listy wydatków</a></p>
 </body>
 </html>

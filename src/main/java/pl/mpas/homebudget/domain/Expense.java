@@ -1,17 +1,22 @@
 package pl.mpas.homebudget.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-//@Entity
+@Entity
 public class Expense {
 
-    //  @Id
-    //@GeneratedValue
+    @Id
+    @GeneratedValue
     private Long id;
 
-    //@Column (nullable = false)
+    @Column(nullable = false)
     private String expenseTitle;
 
     private PaymentMethod method;
@@ -20,6 +25,7 @@ public class Expense {
 
     private BigDecimal expenseAmount;
 
+    @OneToOne
     private ExpenseCategory category;
 
     private LocalDate expenseDate;
@@ -31,7 +37,8 @@ public class Expense {
     public Expense() {
     }
 
-    public Expense(String expenseTitle, PaymentMethod method, String expensePlace, BigDecimal expenseAmount, ExpenseCategory category, LocalDate expenseDate, LocalDateTime creationDateTime, boolean deleted) {
+    public Expense(String expenseTitle, PaymentMethod method, String expensePlace, BigDecimal expenseAmount,
+                   ExpenseCategory category, LocalDate expenseDate, LocalDateTime creationDateTime, boolean deleted) {
         //this.id = id;
         this.expenseTitle = expenseTitle;
         this.method = method;
