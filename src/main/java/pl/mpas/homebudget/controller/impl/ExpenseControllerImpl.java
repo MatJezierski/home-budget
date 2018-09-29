@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import pl.mpas.homebudget.controller.ExpenseController;
+import pl.mpas.homebudget.domain.Expense;
 import pl.mpas.homebudget.domain.PaymentMethod;
 import pl.mpas.homebudget.service.ExpenseCategoryService;
 import pl.mpas.homebudget.service.ExpenseService;
@@ -34,11 +35,15 @@ public class ExpenseControllerImpl implements ExpenseController {
         return "expense/expenses-all";
     }
 
-    @GetMapping("/expense/all")
+    @GetMapping("/expense/add")
     @Override
     public String addExpense(Model model) {
 
-        model.addAttribute("paymentMethods", PaymentMethod.values());
-        return "expense/new-edit";
+        model.addAttribute("operationTitle", "New");
+        model.addAttribute("mainParagraph", "New");
+        model.addAttribute("expense", new Expense());
+        model.addAttribute("categories", categoryService.readAllExpenseCategories());
+        model.addAttribute("paymentMethods", PaymentMethod.getAllPaymentMethods());
+        return "expense/new-edit-expense";
     }
 }
