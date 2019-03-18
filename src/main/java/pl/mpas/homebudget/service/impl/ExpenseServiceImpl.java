@@ -12,8 +12,7 @@ import pl.mpas.homebudget.service.ExpenseService;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class ExpenseServiceImpl implements ExpenseService {
@@ -30,16 +29,43 @@ public class ExpenseServiceImpl implements ExpenseService {
     public List<Expense> readallExpenses() {
 
         logger.info("readAllExpenses()");
-//        Iterable<Expense> expenses = expenseDao.findAll();
-//        return (List<Expense>) expenses;
-        //FIXME - remove this test source
-        ExpenseCategory category = new ExpenseCategory(LocalDateTime.now(),"Biedronka",false);
-        List<Expense> testList = new ArrayList<>();
-        testList.add(new Expense("Skarpetki",PaymentMethod.CASH,"Rzeszów",BigDecimal.ONE,category,LocalDate.now(),
-                LocalDateTime.now(),false));
-        testList.add(new Expense("Bluza",PaymentMethod.CREDIT,"Lublin",BigDecimal.ONE,category,LocalDate.now(),
-                LocalDateTime.now(),false));
-        //skoro tutaj podajemy miejsce wydatku, to możemy w przyszłości zrobić lokalizację Google geo i zaznaczać szpilkami
-        return testList;
+
+        List<Expense> expensesResult = (List<Expense>) expenseDao.findAll();
+        Collections.sort(expensesResult, Comparator.comparing(Expense::getExpenseTitle));
+        logger.info("Sorted expenses read from dao: {}", expensesResult);
+
+        return expensesResult;
+    }
+
+    @Override
+    public boolean saveExpense(Expense expense) {
+
+        Expense savedExpense = expenseDao.save(expense);
+
+        return null != savedExpense.getId();
+    }
+
+    @Override
+    public Optional<Expense> findExpenseById(Long id) {
+
+        return expenseDao.findById(id);
+    }
+
+    @Override
+    public List<Expense> findExpenseByAmount(double amount) {
+
+        logger.info("findExpenseByAmount()");
+
+        List<Expense> expensesByAmount = (List<Expense>) expenseDao.findAll();
+        Collections.sort(expensesByAmount, Comparator.comparing(Expense::getExpenseAmount));
+        logger.info("Expenses sorted by amount, read from dao: {}", expensesByAmount);
+
+        return expensesByAmount;
+    }
+
+    @Override
+    public void deleteExpenseById(Long id) {
+
+        expenseDao.deleteById(id);
     }
 }

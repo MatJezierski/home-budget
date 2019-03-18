@@ -11,6 +11,9 @@
         // Set a callback to run when the Google Visualization API is loaded.
         google.charts.setOnLoadCallback(drawChart);
 
+        var expenseTitle = new pl.mpas.homebudget.domain.Expense.getExpenseTitle();
+        var expenseAmount = new pl.mpas.homebudget.domain.Expense.getExpenseAmount();
+
         // Callback that creates and populates a data table,
         // instantiates the pie chart, passes in the data and
         // draws it.
@@ -18,20 +21,20 @@
 
             // Create the data table.
             var data = new google.visualization.DataTable();
-            data.addColumn('string', 'Topping');
-            data.addColumn('number', 'Slices');
+            data.addColumn('string', 'Expense Name');
+            data.addColumn('number', 'Expense Total Amount');
             data.addRows([
-                ['Mushrooms', 3],
-                ['Onions', 1],
-                ['Olives', 1],
-                ['Zucchini', 1],
-                ['Pepperoni', 2]
+                ['expenseTitle', expenseAmount],
+                // ['Onions', 1],
+                // ['Olives', 1],
+                // ['Zucchini', 1],
+                // ['Pepperoni', 2]
             ]);
 
             // Set chart options
-            var options = {'title':'How Much Pizza I Ate Last Night',
-                'width':400,
-                'height':300};
+            var options = {'title':'Distribution amounts over expenses types',
+                'width':1400,
+                'height':1300};
 
             // Instantiate and draw our chart, passing in some options.
             var chart = new google.visualization.PieChart(document.getElementById('chart_div'));

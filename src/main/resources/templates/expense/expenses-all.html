@@ -7,32 +7,36 @@
 </head>
 <body>
 <h2> All expense categories</h2>
-<table>
-    <thead>
-    <tr>
-        <th>Expense title</th>
-        <th>Payment method</th>
-        <th>Expense place</th>
-        <th>Expense amount</th>
-        <th>Category</th>
-        <th>Expense date</th>
-        <th>Edit</th>
-        <th>Delete</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="expense : ${expenses}">
-        <td th:text="${expense.expenseTitle}">Kawa</td>
-        <td th:text="${expense.method}">Karta</td>
-        <td th:text="${expense.expensePlace}">Rzeszów</td>
-        <td th:text="${expense.expenseAmount}">15</td>
-        <td th:text="${expense.category.categoryName}">Zakupy w Biedronce</td>
-        <td th:text="${#temporals.format(expense.expenseDate, 'dd-MM-yyyy')}">15-05-2018</td>
-        <td><a th:href="@{'/expense/edit/' + ${expense.id}}">Edit</a></td>
-        <td><a th:href="@{'/expense/delete-confirmation/' + ${expense.id}}">Delete</a></td>
-    </tr>
-    </tbody>
-</table>
+    <table>
+        <thead>
+        <tr>
+            <th>Expense title</th>
+            <th>Payment method</th>
+            <th>Expense place</th>
+            <th>Expense amount</th>
+            <th>Category</th>
+            <th>Expense date</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="expense : ${expenses}">
+            <td th:text="${expense.expenseTitle}">Kawa</td>
+            <td th:text="${expense.method}">Karta</td>
+            <td th:text="${expense.expensePlace}">Rzeszów</td>
+            <td th:text="${expense.expenseAmount}">15</td>
+            <td th:text="${expense.category.categoryName}">Zakupy w Biedronce</td>
+            <td th:text="${#temporals.format(expense.expenseDate, 'dd-MM-yyyy')}">15-05-2018</td>
+            <td><a th:href="@{'/expense/edit/' + ${expense.id}}">Edit</a></td>
+            <td><a th:href="@{'/expense/delete-confirmation/' + ${expense.id}}">Delete</a></td>
+        </tr>
+        </tbody>
+
+    </table>
 <p><a href="#" th:href="@{/expense/add}">Add new expense</a></p>
+<br>
+<p><a href="#" th:href="@{/home}">Return to the main page</a></p>
 </body>
 </html>

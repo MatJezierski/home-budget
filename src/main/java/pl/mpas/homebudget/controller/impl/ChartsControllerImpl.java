@@ -17,6 +17,7 @@ public class ChartsControllerImpl implements ChartsController {
     private ChartsService chartsService;
 
     public ChartsControllerImpl(ChartsService chartsService) {
+
         this.chartsService = chartsService;
     }
 

@@ -21,13 +21,14 @@ public class ChartsServiceImpl implements ChartsService {
     private ExpenseService expenseService;
 
     public ChartsServiceImpl (ExpenseService expenseService) {
+
         this.expenseService = expenseService;
     }
 
     @Override
     public Map<String, BigDecimal> readCategoriesOverAmounts() {
-        List<Expense> allExpenses = expenseService.readallExpenses();
 
+        List<Expense> allExpenses = expenseService.readallExpenses();
         Map<String, BigDecimal> result = new LinkedHashMap<>();
 
         for (Expense expense: allExpenses) {

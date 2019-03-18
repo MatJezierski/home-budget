@@ -8,6 +8,7 @@ public class HomeBudget {
 
 
     public static void main(String[] args) {
+
         SpringApplication.run(HomeBudget.class, args);
     }
 }

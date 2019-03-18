@@ -6,4 +6,5 @@ import pl.mpas.homebudget.domain.Expense;
 
 @Repository
 public interface ExpenseRepository extends CrudRepository <Expense, Long> {
+
 }

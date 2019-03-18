@@ -25,12 +25,6 @@ public class ExpenseCategoryServiceImpl implements ExpenseCategoryService {
     }
 
     @Override
-    public Optional<ExpenseCategory> findCategoryById(Long id) {
-
-        return dataRepository.findById(id);
-    }
-
-    @Override
     public List<ExpenseCategory> readAllExpenseCategories() {
 
         List<ExpenseCategory> result = (List<ExpenseCategory>) dataRepository.findAll();
@@ -47,7 +41,14 @@ public class ExpenseCategoryServiceImpl implements ExpenseCategoryService {
     }
 
     @Override
+    public Optional<ExpenseCategory> findCategoryById(Long id) {
+
+        return dataRepository.findById(id);
+    }
+
+    @Override
     public void deleteCategoryById(Long id) {
+
         dataRepository.deleteById(id);
     }
 }
