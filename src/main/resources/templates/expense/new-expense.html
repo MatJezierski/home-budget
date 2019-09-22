@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${operationTitle} + 'expense'">Expense category</title>
+
+    <link type="text/css"
+          rel="stylesheet"
+          th:href="@{/assets/category-style.css}"/>
+
+    <link type="text/css"
+          rel="stylesheet"
+          th:href="@{/assets/add-category-style.css}"/>
+
+</head>
+
+<body>
+        <p th:text="${mainParagraph} + 'expense'"><b>Expense category</b></p>
+
+        <form action="#" th:action="@{/expense/save}" th:object="${expense}" method="post">
+            <input type="hidden" th:field="*{id}"/>
+            <p>Title: <input type="text" th:field="*{expenseTitle}"/p>
+            <p>Category:
+            <select>
+                <option utext="Biedronka"
+                        th:each="category : ${categories}"
+                        th:value="${category}"
+                        th:utext="${category.categoryName}">Biedronka</option>
+            </select>
+            </p>
+
+            <p><input type="submit" name="pressed-button" value="Save"/>
+                <input type="submit" name="pressed-button" value="Cancel"/>
+                <input type="reset" value="Reset"/></p>
+        </form>
+</body>
+
+</html>

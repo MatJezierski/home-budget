@@ -49,7 +49,7 @@ public class ExpenseCategoryControllerImpl implements ExpenseCategoryController 
     }
 
     @GetMapping("/category/add")
-    public String addCategory(Model category) { //@ModelAttribute  - ta adnostacja Springa konwertuje
+    public String addCategory(Model category) { //@ModelAttribute  - ta adnotacja Springa konwertuje
         // tekst z formularza HTMLowego (np "dodaj kategorię") do obiektu w Javie, który następnie ląduje w tej metodzie addCategory().
         logger.info("addCategory()");
 

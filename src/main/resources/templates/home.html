@@ -4,14 +4,64 @@
     <meta charset="UTF-8"/>
     <title>Home budget</title>
     <link rel="stylesheet" th:href="@{/assets/style.css}"/>
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="https://fonts.googleapis.com/css?family=Oleo+Script:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Teko:400,700" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
-<body>
-    <h1>Home budget</h1>
-    <p> Welcome to Home Budget application! </p>
-    <img th:src="@{/assets/happy_dollar.jpg.jpg}"/>
-    <p><a href="#" th:href="@{/category/all}">Przejdź do kategorii wydatków</a></p>
-    <p><a href="#" th:href="@{/expenses/all}">Przejdź do listy wydatków</a></p>
-    <p><a href="#" th:href="@{/expenses/all}">Przejdź do analizy wydatków</a></p>
-    <p><a href="#" th:href="@{/standing_order/all}">Przejdź do listy stałych zleceń</a></p>
+
+<body class="masterhead">
+<h1>Home budget</h1>
+<p><b>Welcome to Home Budget application!</b></p>
+
+
+<div class="row">
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body" style="border: 1px solid black">
+                <h5 class="card-title">Przejdź do kategorii wydatków</h5>
+                <p class="card-text">Kategorie na które wydajesz pieniądze.</p>
+                <a href="#" th:href="@{/category/all}" class="btn btn-primary">Przejdź</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <span class="border border-dark"></span>
+                <h5 class="card-title">Przejdź do listy wydatków</h5>
+                <p class="card-text">Lista bieżących wydatków</p>
+                <a href="#" th:href="@{/expenses/all}" class="btn btn-primary">Przejdź</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br>
+
+<div class="row">
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <span class="border border-dark"></span>
+                <h5 class="card-title">Przejdź do kategorii wydatków</h5>
+                <p class="card-text">Kategorie na które wydajesz pieniądze.</p>
+                <a href="#" th:href="@{/category/all}" class="btn btn-primary">Przejdź</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <span class="border border-dark"></span>
+                <h5 class="card-title">Przejdź do listy wydatków</h5>
+                <p class="card-text">Lista bieżących wydatków</p>
+                <a href="#" th:href="@{/expenses/all}" class="btn btn-primary">Przejdź</a>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>

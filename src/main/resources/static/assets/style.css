@@ -1,3 +1,48 @@
+div {
+    border-style:solid;
+    border-width:5px;
+    border-color:#ff9900;
+}
+
 h1 {
     background: greenyellow;
 }
+.masterhead{
+    height: 100vh;
+    min-height: 1200px;
+    background-image: url("http://www.kiplinger.com/kipimages/pages/10332.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.content{
+    color: white;
+    font-size: 20px;
+}
+
+.content-header{
+    font-family: 'Oleo Script', cursive;
+    color: white;
+    font-size: 30px;
+}
+
+.button {
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+    text-decoration: none;
+    color: initial;
+}
+
+.row {
+    width: 100%;
+    text-align: center; // center the content of the container
+}
+
+.block {
+    width: 100px;
+    display: inline-block; // display inline with abality to provide width/height
+}​
+

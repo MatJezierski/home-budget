@@ -4,9 +4,25 @@
 <head>
     <meta charset="UTF-8">
     <title>All expenses</title>
+
+    <link type="text/css"
+          rel="stylesheet"
+          th:href="@{/assets/category-style.css}"/>
+
+    <link type="text/css"
+          rel="stylesheet"
+          th:href="@{/assets/add-category-style.css}"/>
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="https://fonts.googleapis.com/css?family=Oleo+Script:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Teko:400,700" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+
 </head>
 <body>
-<h2> All expense categories</h2>
+
+<h2> All current expenses </h2>
     <table>
         <thead>
         <tr>
@@ -23,7 +39,7 @@
 
         <tbody>
         <tr th:each="expense : ${expenses}">
-            <td th:text="${expense.expenseTitle}">Kawa</td>
+            <td input type="text" class="form-control" placeholder="np. Żywność" th:text="${expense.expenseTitle}"></td>
             <td th:text="${expense.method}">Karta</td>
             <td th:text="${expense.expensePlace}">Rzeszów</td>
             <td th:text="${expense.expenseAmount}">15</td>
@@ -35,8 +51,49 @@
         </tbody>
 
     </table>
-<p><a href="#" th:href="@{/expense/add}">Add new expense</a></p>
-<br>
-<p><a href="#" th:href="@{/home}">Return to the main page</a></p>
+
+<form>
+    <div class="block">
+    <div class="form-group">
+        <label for="expenseName">Nazwa wydatku</label>
+        <input type="text" class="form-control" id="expenseName" placeholder="np. Żywność">
+    </div>
+    <div class="form-group">
+        <label for="paymentMethod">Metoda płatności</label>
+        <select class="form-control" id="paymentMethod">
+            <option>Karta</option>
+            <option>Gotówka</option>
+            <option>Przelew</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="expensePlace">Miejsce zakupu</label>
+        <input type="text" class="form-control" id="expensePlace" placeholder="np. Warszawa">
+    </div>
+    <div class="form-group">
+        <label for="expenseAmount">Kwota zakupu</label>
+        <input type="number" class="form-control" id="expenseAmount" placeholder="np. 100">
+    </div>
+    <div class="form-group">
+        <label for="expenseCategory">Kategoria wydatku</label>
+        <select multiple class="form-control" id="expenseCategory">
+            <option>Płatności</option>
+            <option>Oszczędności</option>
+            <option>Żywność</option>
+            <option>Zdrowie</option>
+            <option>Wygląd</option>
+            <option>Dom</option>
+            <option>Praca</option>
+            <option>Kultura</option>
+            <option>Rozrywka</option>
+        </select>
+    </div>
+
+    <a class="btn btn-sm btn-success" href="#" th:href="@{/expense/add}" role="button">Save</a>
+    <br><br>
+    <a class="btn btn-sm btn-success" href="#" th:href="@{/home}" role="button">Main page</a>
+    </div>
+</form>
+
 </body>
 </html>

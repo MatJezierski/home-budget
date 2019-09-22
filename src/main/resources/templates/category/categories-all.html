@@ -3,9 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>All categories</title>
+
+    <link type="text/css"
+          rel="stylesheet"
+          th:href="@{/assets/category-style.css}"/>
+
+    <link type="text/css"
+          rel="stylesheet"
+          th:href="@{/assets/add-category-style.css}"/>
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="https://fonts.googleapis.com/css?family=Oleo+Script:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Teko:400,700" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
 </head>
 <body>
-<h2> All expense categories</h2>
+<h2> All categories of household expenses </h2>
 <table>
     <thead>
     <tr>
@@ -15,6 +29,7 @@
         <th>Delete</th>
     </tr>
     </thead>
+
     <tbody>
     <tr th:each="category : ${categories}">
         <td th:text="${#temporals.format(category.creationDateTime, 'dd-MM-yyyy HH:mm')}">Today</td>
@@ -24,8 +39,9 @@
     </tr>
     </tbody>
 </table>
-<p><a th:href="@{/category/add}">Dodaj nową kategorię</a></p>
-<br>
-<p><a href="#" th:href="@{/home}">Return to the main page</a></p>
+<br><br>
+<p><a class="btn btn-sm btn-success" href="#" th:href="@{/category/add}" role="button">Add new category</a></p>
+<br><br>
+<p><a class="btn btn-sm btn-success" href="#" th:href="@{/home}" role="button">Main page</a></p>
 </body>
 </html>

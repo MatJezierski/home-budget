@@ -10,6 +10,10 @@ buildscript {
     }
 }
 
+plugins {
+    id 'war'
+}
+
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
@@ -18,8 +22,10 @@ apply plugin: 'io.spring.dependency-management'
 group = 'pl.mpas'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 repositories {
+    mavenLocal()
     mavenCentral()
 }
 
@@ -32,4 +38,7 @@ dependencies {
     runtime('com.h2database:h2')
     runtime('mysql:mysql-connector-java')
     testCompile('org.springframework.boot:spring-boot-starter-test')
+    compile('org.apache.struts:struts2-core:2.3.16.1')
+    providedCompile('javax.servlet.jsp:jsp-api:2.1')
+    providedCompile('javax.servlet:javax.servlet-api:3.1.0')
 }

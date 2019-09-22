@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.mpas.homebudget.controller.ExpenseController;
 import pl.mpas.homebudget.domain.Expense;
-import pl.mpas.homebudget.domain.ExpenseCategory;
 import pl.mpas.homebudget.domain.PaymentMethod;
 import pl.mpas.homebudget.service.ExpenseCategoryService;
 import pl.mpas.homebudget.service.ExpenseService;
@@ -57,7 +56,7 @@ public class ExpenseControllerImpl implements ExpenseController {
         return "redirect:/category/all"; //jeśli "Cancel", to powróć do wszystkich wydatków
     }
 
-    @GetMapping("/expense/add")
+    @PostMapping("/expense/add")
     @Override
     public String addExpense(Model newExpense) {
 
@@ -67,7 +66,7 @@ public class ExpenseControllerImpl implements ExpenseController {
         newExpense.addAttribute("categories", categoryService.readAllExpenseCategories());
         newExpense.addAttribute("paymentMethods", PaymentMethod.getAllPaymentMethods());
 
-        return "expense/new-edit-expense";
+        return "new-expense";
     }
 
     @Override

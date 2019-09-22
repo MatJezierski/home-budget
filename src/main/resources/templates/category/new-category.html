@@ -4,15 +4,31 @@
 <head>
     <meta charset="UTF-8">
     <title th:text="${operationTitle} + ' expense category'">Expense category</title>
+
+    <link type="text/css"
+          rel="stylesheet"
+          th:href="@{/assets/category-style.css}"/>
+
+    <link type="text/css"
+          rel="stylesheet"
+          th:href="@{/assets/add-category-style.css}"/>
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="https://fonts.googleapis.com/css?family=Oleo+Script:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Teko:400,700" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
 </head>
+
 <body>
 <p th:text="${mainParagraph} + ' expense category'"><b>Expense category</b></p>
-<form action="#" th:action="@{/category/save}" th:object="${newCategory}" method="post">
-    <input type="hidden" th:field="*{id}"/>
-    <p>Category name: <input type="text" th:field="*{categoryName}"/></p>
-    <p><input type="submit" name="pressed-button" value="Save"/>
-        <input type="submit" name="pressed-button" value="Cancel"/>
-        <input type="reset" value="Reset"/></p>
-</form>
+    <form action="#" th:action="@{/category/save}" th:object="${newCategory}" method="post">
+        <input type="hidden" th:field="*{id}"/>
+        <p>Category name: <input type="text" th:field="*{categoryName}"/></p>
+        <p><input type="submit" name="pressed-button" value="Save"/>
+            <input type="submit" name="pressed-button" value="Cancel"/>
+            <input type="reset" value="Reset"/></p>
+    </form>
 </body>
+
 </html>
