@@ -19,9 +19,9 @@
 <div class="row">
     <div class="col-sm-6">
         <div class="card">
-            <div class="card-body" style="border: 1px solid black">
-                <h5 class="card-title">Przejdź do kategorii wydatków</h5>
-                <p class="card-text">Kategorie na które wydajesz pieniądze.</p>
+            <div class="card-body">
+                <h5 class="card-title">Przejdź do listy kategorii wydatków</h5>
+                <p class="card-text">Aktualnie dodane kategorie</p>
                 <a href="#" th:href="@{/category/all}" class="btn btn-primary">Przejdź</a>
             </div>
         </div>
@@ -31,8 +31,8 @@
             <div class="card-body">
                 <span class="border border-dark"></span>
                 <h5 class="card-title">Przejdź do listy wydatków</h5>
-                <p class="card-text">Lista bieżących wydatków</p>
-                <a href="#" th:href="@{/expenses/all}" class="btn btn-primary">Przejdź</a>
+                <p class="card-text">Ostatnio dodane wydatki</p>
+                <a href="#" th:href="@{/expense/all}" class="btn btn-primary">Przejdź</a>
             </div>
         </div>
     </div>
@@ -45,9 +45,9 @@
         <div class="card">
             <div class="card-body">
                 <span class="border border-dark"></span>
-                <h5 class="card-title">Przejdź do kategorii wydatków</h5>
-                <p class="card-text">Kategorie na które wydajesz pieniądze.</p>
-                <a href="#" th:href="@{/category/all}" class="btn btn-primary">Przejdź</a>
+                <h5 class="card-title">Dodaj nową kategorię wydatków</h5>
+                <p class="card-text">Dodaje nową kategorię do istniejących</p>
+                <a href="#" th:href="@{/category/add}" class="btn btn-primary">Przejdź</a>
             </div>
         </div>
     </div>
@@ -55,9 +55,9 @@
         <div class="card">
             <div class="card-body">
                 <span class="border border-dark"></span>
-                <h5 class="card-title">Przejdź do listy wydatków</h5>
-                <p class="card-text">Lista bieżących wydatków</p>
-                <a href="#" th:href="@{/expenses/all}" class="btn btn-primary">Przejdź</a>
+                <h5 class="card-title">Dodaj nowy wydatek</h5>
+                <p class="card-text">Dodaje nowy wydatek, z przyporządkowaniem do kategorii</p>
+                <a href="#" th:href="@{/expense/add}" class="btn btn-primary">Przejdź</a>
             </div>
         </div>
     </div>

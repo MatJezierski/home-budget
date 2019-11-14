@@ -8,6 +8,6 @@ public interface ExpenseCategoryController {
 
     String allCategories(Model categories);
 
-    public String addCategory(Model category);
+    String addCategory(Model category);
 
 }

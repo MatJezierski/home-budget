@@ -39,6 +39,7 @@ public class ExpenseCategoryControllerImpl implements ExpenseCategoryController 
     // add bean validation
     public String saveCategory(@ModelAttribute ExpenseCategory expenseCategory,
                                @RequestParam(name = "pressed-button") String pushedButton) {
+
         logger.info("saveCategory(), expenseCategory: {}, pushedButton: ()",
                 expenseCategory, pushedButton);
 

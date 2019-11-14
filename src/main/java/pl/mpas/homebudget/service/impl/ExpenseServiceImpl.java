@@ -2,16 +2,12 @@ package pl.mpas.homebudget.service.impl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.mpas.homebudget.dao.ExpenseRepository;
 import pl.mpas.homebudget.domain.Expense;
-import pl.mpas.homebudget.domain.ExpenseCategory;
-import pl.mpas.homebudget.domain.PaymentMethod;
 import pl.mpas.homebudget.service.ExpenseService;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.*;
 
 @Service
@@ -21,7 +17,10 @@ public class ExpenseServiceImpl implements ExpenseService {
 
     private ExpenseRepository expenseDao;
 
+
+    @Autowired
     public ExpenseServiceImpl (ExpenseRepository expenseDao) {
+
         this.expenseDao = expenseDao;
     }
 

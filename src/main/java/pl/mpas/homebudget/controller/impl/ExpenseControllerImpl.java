@@ -5,10 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import pl.mpas.homebudget.controller.ExpenseController;
 import pl.mpas.homebudget.domain.Expense;
 import pl.mpas.homebudget.domain.PaymentMethod;
@@ -16,6 +13,7 @@ import pl.mpas.homebudget.service.ExpenseCategoryService;
 import pl.mpas.homebudget.service.ExpenseService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class ExpenseControllerImpl implements ExpenseController {
@@ -26,15 +24,13 @@ public class ExpenseControllerImpl implements ExpenseController {
     private ExpenseCategoryService categoryService;
 
     @Autowired
-    public ExpenseControllerImpl(ExpenseService expenseService,
-                                 ExpenseCategoryService categoryService){
+    public ExpenseControllerImpl(ExpenseService expenseService, ExpenseCategoryService categoryService){
         this.expenseService = expenseService;
         this.categoryService = categoryService;
     }
 
-    @GetMapping("/expenses/all")
-    @Override
-    public String showAllExpenses(Model expenses) {
+    @GetMapping("/expense/all")
+    public String allExpenses(Model expenses) {
 
         logger.info("showAllExpenses()");
         List<Expense> expensesList = expenseService.readallExpenses();
@@ -43,41 +39,66 @@ public class ExpenseControllerImpl implements ExpenseController {
         return "expense/expenses-all";
     }
 
-    @PostMapping("/expense/saved")
+    @PostMapping("/expense/save")
     public String saveExpense(@ModelAttribute Expense expenseTitle,
                               @RequestParam(name = "pressed-button") String pushedButton) {
-        logger.info("saveExpense(), expenseTitle: {}, pushedButton: ()",
-                expenseTitle, pushedButton);
+
+        logger.info("saveExpense(), expenseTitle: {}, pushedButton: ()", expenseTitle, pushedButton);
 
         if ("save".equalsIgnoreCase(pushedButton)) {
-            expenseService.saveExpense(expenseTitle); // jeśli "Save", to zapisz i dodaj do wszystkich wydatków
+            expenseService.saveExpense(expenseTitle);
         }
 
-        return "redirect:/category/all"; //jeśli "Cancel", to powróć do wszystkich wydatków
+        return "redirect:/expense/all";
     }
 
-    @PostMapping("/expense/add")
-    @Override
-    public String addExpense(Model newExpense) {
+    @GetMapping("/expense/add")
+    public String addExpense(Model expense) {
 
-        newExpense.addAttribute("operationTitle", "New");
-        newExpense.addAttribute("mainParagraph", "New");
-        newExpense.addAttribute("expense", new Expense());
-        newExpense.addAttribute("categories", categoryService.readAllExpenseCategories());
-        newExpense.addAttribute("paymentMethods", PaymentMethod.getAllPaymentMethods());
+        expense.addAttribute("operationTitle", "New");
+        expense.addAttribute("mainParagraph", "Add new");
+        expense.addAttribute("newExpense", new Expense());
+        expense.addAttribute("categories", categoryService.readAllExpenseCategories());
+        expense.addAttribute("paymentMethods", PaymentMethod.getAllPaymentMethods());
 
-        return "new-expense";
+        return "expense/new-expense";
     }
 
-    @Override
-    public String showChart(Model newChart) {
+    @GetMapping("/expense/edit/{id}")
+    public String editExpense(@PathVariable Long id, Model model){
+        logger.info("editExpense(), id: ()", id);
 
-        return "charts/category-charts";
+        model.addAttribute("operationTitle", "Edit");
+        model.addAttribute("mainParagraph", "Edit");
+
+        Optional<Expense> foundExpense = expenseService.findExpenseById(id);
+        foundExpense.ifPresent(expense -> model.addAttribute("newExpense", expense));
+
+        return "expense/new-expense";
     }
 
-    @Override
-    public String removeExpense(Model removedExpense) {
+    @GetMapping("/expense/delete-confirmation/{id}")
+    public String deleteConfirmation(@PathVariable Long id, Model model) {
+        logger.info("deleteExpense(), id: ()", id);
 
-        return "redirect:/category/all";
+        Optional<Expense> expenseToAsk = expenseService.findExpenseById(id);
+        expenseToAsk.ifPresent(expense -> model.addAttribute("expenseToAsk", expense));
+
+        model.addAttribute("operationTitle", "Delete");
+
+        return "expense/delete-confirmation";
     }
+
+    public String deleteExpense(Model removedExpense) {
+
+        return "redirect:/newExpense/all";
+    }
+
+    public String showChart(Model chart) {
+
+        return "charts/newExpense-chart";
+    }
+
+
+
 }

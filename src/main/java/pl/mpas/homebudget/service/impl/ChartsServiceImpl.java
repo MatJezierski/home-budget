@@ -45,7 +45,7 @@ public class ChartsServiceImpl implements ChartsService {
        }
 
 //        allExpenses.stream()
-//                .map(expense -> expense.getCategory().getCategoryName());
+//                .map(newExpense -> newExpense.getCategory().getCategoryName());
 
         return Collections.emptyMap();
     }

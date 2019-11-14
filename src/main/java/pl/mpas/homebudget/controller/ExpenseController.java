@@ -4,12 +4,10 @@ import org.springframework.ui.Model;
 
 public interface ExpenseController {
 
-    String showAllExpenses(Model expenses);
+    String allExpenses(Model expenses);
 
-    String addExpense(Model newExpense);
+    String addExpense(Model expense);
 
-    String showChart (Model newChart);
-
-    String removeExpense (Model removedExpense);
+    String showChart (Model chart);
 
 }

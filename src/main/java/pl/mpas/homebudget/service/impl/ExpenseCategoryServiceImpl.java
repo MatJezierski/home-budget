@@ -5,11 +5,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.mpas.homebudget.dao.ExpenseCategoryRepository;
-import pl.mpas.homebudget.domain.Expense;
 import pl.mpas.homebudget.domain.ExpenseCategory;
 import pl.mpas.homebudget.service.ExpenseCategoryService;
 
-import java.time.LocalDateTime;
 import java.util.*;
 
 @Service
@@ -29,7 +27,7 @@ public class ExpenseCategoryServiceImpl implements ExpenseCategoryService {
 
         List<ExpenseCategory> result = (List<ExpenseCategory>) dataRepository.findAll();
         Collections.sort(result, Comparator.comparing(ExpenseCategory::getCategoryName));
-        logger.info("Sorted expense categories read from dao: {}", result);
+        logger.info("Sorted newExpense categories read from dao: {}", result);
 
         return result;
     }

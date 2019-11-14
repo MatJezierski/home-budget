@@ -3,7 +3,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title th:text="${operationTitle} + 'expense'">Expense category</title>
+    <b><title th:text="${operationTitle} + 'expense'">Expense category</title></b>
 
     <link type="text/css"
           rel="stylesheet"
@@ -13,26 +13,44 @@
           rel="stylesheet"
           th:href="@{/assets/add-category-style.css}"/>
 
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="https://fonts.googleapis.com/css?family=Oleo+Script:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Teko:400,700" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
 </head>
 
 <body>
-        <p th:text="${mainParagraph} + 'expense'"><b>Expense category</b></p>
+        <p th:text="${mainParagraph} + ' expense:'"><b>Expense</b></p>
 
-        <form action="#" th:action="@{/expense/save}" th:object="${expense}" method="post">
+        <form action="#" th:action="@{/expense/save}" th:object="${newExpense}" method="post">
             <input type="hidden" th:field="*{id}"/>
-            <p>Title: <input type="text" th:field="*{expenseTitle}"/p>
-            <p>Category:
-            <select>
-                <option utext="Biedronka"
-                        th:each="category : ${categories}"
-                        th:value="${category}"
-                        th:utext="${category.categoryName}">Biedronka</option>
-            </select>
+            <p>Title: <input type="text" th:field="*{expenseTitle}"></p>
+            <p>Amount: <input type="text" th:field="*{expenseAmount}"/></p>
+            <p>Payment method:
+                <select class="form-control" id="paymentMethod" th:object="${paymentMethods}">
+                    <option value="Karta">Karta</option>
+                    <option value="Gotówka">Gotówka</option>
+                    <option value="Przelew">Przelew</option>
+                </select>
             </p>
+            <p>Category:
+                <select class="form-control" id="category">
+                    <option utext="Biedronka"
+                            th:each="category : ${categories}"
+                            th:value="${category}"
+                            th:utext="${category.categoryName}">Biedronka
+                    </option>
+                </select>
+            </p>
+            <p>Location: <input type="text" th:field="*{expensePlace}"/></p>
+            <p>Date and time: <input type="text" th:text="${#temporals.format(newExpense.expenseDate, 'dd-MM-yyyy HH:mm')}"/></p>
 
-            <p><input type="submit" name="pressed-button" value="Save"/>
-                <input type="submit" name="pressed-button" value="Cancel"/>
-                <input type="reset" value="Reset"/></p>
+            <p>
+                <a class="btn btn-sm btn-success" href="#" th:href="@{/expense/all}" role="button">Save</a>
+                <a class="btn btn-sm btn-success" href="#" th:href="@{/home}" role="button">Main page</a>
+                <input type="reset" value="Reset"/>
+            </p>
         </form>
 </body>
 
