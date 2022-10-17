@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.mpas.homebudget.controller.ExpenseController;
 import pl.mpas.homebudget.domain.Expense;
 import pl.mpas.homebudget.domain.PaymentMethod;
-import pl.mpas.homebudget.service.ExpenseCategoryService;
+import pl.mpas.homebudget.service.CategoryService;
 import pl.mpas.homebudget.service.ExpenseService;
 
 import java.util.List;
@@ -21,10 +21,10 @@ public class ExpenseControllerImpl implements ExpenseController {
     private static final Logger logger = LoggerFactory.getLogger(ExpenseControllerImpl.class);
 
     private final ExpenseService expenseService;
-    private final ExpenseCategoryService categoryService;
+    private final CategoryService categoryService;
 
     @Autowired
-    public ExpenseControllerImpl(ExpenseService expenseService, ExpenseCategoryService categoryService){
+    public ExpenseControllerImpl(ExpenseService expenseService, CategoryService categoryService){
         this.expenseService = expenseService;
         this.categoryService = categoryService;
     }

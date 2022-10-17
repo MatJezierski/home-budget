@@ -3,7 +3,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>All lately expenses</title>
+    <title>All categories</title>
 
     <link type="text/css"
           rel="stylesheet"
@@ -19,56 +19,36 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 <body>
-<!--<h2> All categories of household expenses </h2>-->
-<!--<table>-->
-<!--    <thead>-->
-<!--    <tr>-->
-<!--        <th>Creation Date</th>-->
-<!--        <th>Category Name</th>-->
-<!--        <th>Edit</th>-->
-<!--        <th>Delete</th>-->
-<!--    </tr>-->
-<!--    </thead>-->
-
-<!--                <tbody>-->
-<!--                <tr th:each="category : ${categories}">-->
-<!--                    <td th:text="${#temporals.format(category.creationDateTime, 'dd-MM-yyyy HH:mm')}">Today</td>-->
-<!--                    <td th:text="${category.categoryName}">Kawa</td>-->
-<!--                    <td><a th:href="@{'/category/edit/' + ${category.id}}">Edit</a></td>-->
-<!--                    <td><a th:href="@{'/category/delete-confirmation/' + ${category.id}}">Delete</a></td>-->
-<!--                </tr>-->
-<!--                </tbody>-->
-<!--            </table>-->
 <h2 class="h2" th:align="center"> All categories of household expenses </h2>
 <br>
 <br>
-    <table class="table table-striped">
-        <thead class="thead-dark">
-            <tr>
-                <th>Creation Date</th>
-                <th>Category Name</th>
-                <th>Edit</th>
-                <th>Delete</th>
-            </tr>
-        </thead>
+<table class="table table-striped">
+    <thead class="thead-dark">
+    <tr>
+        <th>Creation Date</th>
+        <th>Category Name</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
 
-        <tbody>
-            <tr th:each="category : ${categories}">
-                <td th:text="${#temporals.format(category.creationDateTime, 'dd-MM-yyyy HH:mm')}">Today</td>
-                <td th:text="${category.categoryName}">Kawa</td>
-                <td><a th:href="@{'/category/edit/' + ${category.id}}">Edit</a></td>
-                <td><a th:href="@{'/category/delete-confirmation/' + ${category.id}}">Delete</a></td>
-            </tr>
-        </tbody>
-    </table>
-    <br><br>
-    <br><br>
-        <a class="btn btn--radius-2 btn--green" href="#" th:href="@{/category/add}" role="button" th:align="left">
-            Add new category
-        </a>
-        <a class="btn btn--radius-2 btn--red" href="#" th:href="@{/home}" role="button" th:align="center">
-            Main page
-        </a>
+    <tbody>
+    <tr th:each="category : ${categories}">
+        <td th:text="${#temporals.format(category.creationDateTime, 'dd-MM-yyyy HH:mm')}">Today</td>
+        <td th:text="${category.categoryName}">Kawa</td>
+        <td><a class="btn btn-sm btn-success" th:href="@{'/category/edit/' + ${category.id}}">Edit</a></td>
+        <td><a class="btn btn-sm btn-danger" th:href="@{'/category/delete-confirmation/' + ${category.id}}">Delete</a></td>
+    </tr>
+    </tbody>
+</table>
+<br><br>
+<br><br>
+<a class="btn btn--radius-2 btn--green" href="#" th:href="@{/category/add}" role="button" th:align="left">
+    Add new category
+</a>
+<a class="btn btn--radius-2 btn--red" href="#" th:href="@{/home}" role="button" th:align="center">
+    Main page
+</a>
 
 </body>
 </html>

@@ -5,7 +5,7 @@ import pl.mpas.homebudget.domain.ExpenseCategory;
 import java.util.List;
 import java.util.Optional;
 
-public interface ExpenseCategoryService {
+public interface CategoryService {
 
     List<ExpenseCategory> readAllExpenseCategories();
 

@@ -4,33 +4,32 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import pl.mpas.homebudget.dao.ExpenseCategoryRepository;
+import pl.mpas.homebudget.dao.CategoryRepository;
 import pl.mpas.homebudget.domain.ExpenseCategory;
-import pl.mpas.homebudget.service.ExpenseCategoryService;
+import pl.mpas.homebudget.service.CategoryService;
 
 import java.util.*;
 
 @Service
-public class ExpenseCategoryServiceImpl implements ExpenseCategoryService {
+public class CategoryServiceImpl implements CategoryService {
 
-    private static final Logger logger = LoggerFactory.getLogger(ExpenseCategoryServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(CategoryServiceImpl.class);
 
-    private final ExpenseCategoryRepository dataRepository;
+    private final CategoryRepository dataRepository;
 
     @Autowired
-    public ExpenseCategoryServiceImpl (ExpenseCategoryRepository dataRepository) {
+    public CategoryServiceImpl(CategoryRepository dataRepository) {
         this.dataRepository = dataRepository;
     }
 
     @Override
     public List<ExpenseCategory> readAllExpenseCategories() {
 
-        logger.info("readAllCategories()");
+        logger.info("readAllCategories: ");
 
         List<ExpenseCategory> categoriesResult = (List<ExpenseCategory>) dataRepository.findAll();
         Collections.sort(categoriesResult, Comparator.comparing(ExpenseCategory::getCategoryName));
-        logger.info("Sorted Expense Categories read from dao: {}", categoriesResult);
+        logger.info("Sorted categories read from dao: {}", categoriesResult);
 
         return categoriesResult;
     }

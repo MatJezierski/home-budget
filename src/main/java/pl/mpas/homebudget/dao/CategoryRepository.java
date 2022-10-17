@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 import pl.mpas.homebudget.domain.ExpenseCategory;
 
 @Repository
-public interface ExpenseCategoryRepository extends CrudRepository <ExpenseCategory, Long> {
+public interface CategoryRepository extends CrudRepository <ExpenseCategory, Long> {
 
     // DAO = Data Access Object
 

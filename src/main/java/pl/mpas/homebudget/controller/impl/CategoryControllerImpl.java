@@ -8,23 +8,23 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
-import pl.mpas.homebudget.controller.ExpenseCategoryController;
+import pl.mpas.homebudget.controller.CategoryController;
 import pl.mpas.homebudget.domain.ExpenseCategory;
-import pl.mpas.homebudget.service.ExpenseCategoryService;
+import pl.mpas.homebudget.service.CategoryService;
 
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
 @Controller
-public class ExpenseCategoryControllerImpl implements ExpenseCategoryController {
+public class CategoryControllerImpl implements CategoryController {
 
-    private static final Logger logger = LoggerFactory.getLogger(ExpenseCategoryControllerImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(CategoryControllerImpl.class);
 
-    private final ExpenseCategoryService categoryService;
+    private final CategoryService categoryService;
 
     @Autowired
-    public ExpenseCategoryControllerImpl(ExpenseCategoryService categoryService) {
+    public CategoryControllerImpl(CategoryService categoryService) {
         this.categoryService = categoryService;
     }
 
@@ -100,10 +100,9 @@ public class ExpenseCategoryControllerImpl implements ExpenseCategoryController 
         return "category/delete-confirmation";
     }
 
-    @DeleteMapping("/category/delete/{id}")
+    @GetMapping("/category/delete/{id}")
     public String deleteCategory(@PathVariable Long id) {
-        logger.info("deleteCategory(), id: ()", id);
-
+        logger.info("deleteCategory(), id: {}", id);
         categoryService.deleteCategoryById(id);
 
         return "redirect:/category/all";
