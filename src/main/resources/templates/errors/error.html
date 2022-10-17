@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Ooops... Something went wrong!</title>
+    <meta name="description" content="Создание адаптивного сайта"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:700" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="css/font-awesome.min.css" />
+    <link rel="stylesheet" th:href="@{/css/error.css}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+<div class="ag-page-404">
+    <div class="ag-toaster-wrap">
+        <div class="ag-toaster">
+            <div class="ag-toaster_back"></div>
+            <div class="ag-toaster_front">
+                <div class="js-toaster_lever ag-toaster_lever"></div>
+            </div>
+            <div class="ag-toaster_toast-handler">
+                <div class="ag-toaster_shadow"></div>
+                <div class="js-toaster_toast ag-toaster_toast js-ag-hide"></div>
+            </div>
+        </div>
+
+        <canvas id="canvas-404" class="ag-canvas-404"></canvas>
+        <img class="ag-canvas-404_img"
+             src="https://raw.githubusercontent.com/SochavaAG/example-mycode/master/pens/404-error-smoke-from-toaster/images/smoke.png">
+    </div>
+</div>
+<div>
+    <h1>OH! You burned it!</h1>
+    <h2>The page you are looking for, does not exist.
+        How you got here is a mystery... <br>
+        But you can click the button below to go back to the homepage.
+    </h2>
+    <br>
+    <a th:href="@{/home}" class="btn-primary">Go back</a>
+</div>
+    <script src="webjars/jquery/3.5.1/jquery.min.js"></script>
+    <script src="webjars/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/error.js}"></script>
+</div>
+</body>

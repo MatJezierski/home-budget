@@ -1,23 +1,27 @@
 package pl.mpas.homebudget.controller.impl;
 
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import pl.mpas.homebudget.controller.ExpenseCategoryController;
 import pl.mpas.homebudget.domain.ExpenseCategory;
 import pl.mpas.homebudget.service.ExpenseCategoryService;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
 @Controller
 public class ExpenseCategoryControllerImpl implements ExpenseCategoryController {
 
-    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(ExpenseCategoryControllerImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(ExpenseCategoryControllerImpl.class);
 
-    private ExpenseCategoryService categoryService;
+    private final ExpenseCategoryService categoryService;
 
     @Autowired
     public ExpenseCategoryControllerImpl(ExpenseCategoryService categoryService) {
@@ -28,6 +32,7 @@ public class ExpenseCategoryControllerImpl implements ExpenseCategoryController 
     @GetMapping("/category/all")
     public String allCategories(Model categories) { //Model categories - klasa Model z pakietu Springa
 
+        logger.info("showAllCategories()");
         List<ExpenseCategory> expenseCategories = categoryService.readAllExpenseCategories();
         categories.addAttribute("categories", expenseCategories);
 
@@ -35,13 +40,21 @@ public class ExpenseCategoryControllerImpl implements ExpenseCategoryController 
     }
 
     @PostMapping("/category/save")
-    //TODO: to deal with empty and duplicated values
-    // add bean validation
-    public String saveCategory(@ModelAttribute ExpenseCategory expenseCategory,
+    //TODO: to deal with duplicated values
+    public String saveCategory(@Valid @ModelAttribute ExpenseCategory expenseCategory, BindingResult result, Model model,
                                @RequestParam(name = "pressed-button") String pushedButton) {
 
-        logger.info("saveCategory(), expenseCategory: {}, pushedButton: ()",
+        logger.info("saveCategory(), expenseCategory: {}, pushedButton: {}",
                 expenseCategory, pushedButton);
+
+        if (result.hasErrors()){
+            model.addAttribute("expenseCategory", expenseCategory);
+            logger.info("Has errors = "+result.hasErrors());
+            for (FieldError err:result.getFieldErrors()){
+                System.out.println(err.getDefaultMessage()); // Output: must be greater than or equal to 10
+            }
+            return "errors/error";
+        }
 
         if ("save".equalsIgnoreCase(pushedButton)) {
             categoryService.saveCategory(expenseCategory); // jeśli "Save", to zapisz i dodaj do wszystkich kategorii
@@ -64,7 +77,7 @@ public class ExpenseCategoryControllerImpl implements ExpenseCategoryController 
 
     @GetMapping("/category/edit/{id}")
     public String editCategory(@PathVariable Long id, Model model) {
-        logger.info("editCategory(), id: ()", id);
+        logger.info("editCategory(), id: {}", id);
 
         model.addAttribute("operationTitle", "Edit");
         model.addAttribute("mainParagraph", "Edit");
@@ -77,7 +90,7 @@ public class ExpenseCategoryControllerImpl implements ExpenseCategoryController 
 
     @GetMapping("/category/delete-confirmation/{id}")
     public String deleteConfirmation(@PathVariable Long id, Model model) {
-        logger.info("deleteCategory(), id: ()", id);
+        logger.info("deleteCategory(), id: {}", id);
 
         Optional<ExpenseCategory> categoryToAsk = categoryService.findCategoryById(id);
         categoryToAsk.ifPresent(expenseCategory -> model.addAttribute("categoryToAsk", expenseCategory));
@@ -87,7 +100,7 @@ public class ExpenseCategoryControllerImpl implements ExpenseCategoryController 
         return "category/delete-confirmation";
     }
 
-    @GetMapping("/category/delete/{id}")
+    @DeleteMapping("/category/delete/{id}")
     public String deleteCategory(@PathVariable Long id) {
         logger.info("deleteCategory(), id: ()", id);
 

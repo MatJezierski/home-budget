@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -16,13 +17,19 @@ public class Expense {
     @GeneratedValue
     private Long id;
 
+    @NotNull(message = "This field can not be empty!")
     @Column(nullable = false)
     private String expenseTitle;
 
+    @NotNull(message = "This field can not be empty!")
+    private LocalDateTime creationDateTime;
+
+    @NotNull(message = "This field can not be empty!")
     private PaymentMethod method;
 
     private String expensePlace;
 
+    @NotNull(message = "This field can not be empty!")
     private BigDecimal expenseAmount;
 
     @OneToOne
@@ -30,11 +37,11 @@ public class Expense {
 
     private LocalDate expenseDate;
 
-    private LocalDateTime creationDateTime;
-
     private boolean deleted;
 
     public Expense() {
+
+        creationDateTime = LocalDateTime.now();
     }
 
     public Expense(String expenseTitle, PaymentMethod method, String expensePlace, BigDecimal expenseAmount,

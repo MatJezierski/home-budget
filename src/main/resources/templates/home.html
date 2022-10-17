@@ -3,65 +3,139 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Home budget</title>
-    <link rel="stylesheet" th:href="@{/assets/style.css}"/>
-
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <link href="https://fonts.googleapis.com/css?family=Oleo+Script:400,700" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Teko:400,700" rel="stylesheet">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/main-menu.css}"/>
+    <script async
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDqj4DrPsPYB7n1ucEZZz13bwBBhExRZJ4&libraries=places&callback=initMap">
+    </script>
 </head>
 
-<body class="masterhead">
-<h1>Home budget</h1>
-<p><b>Welcome to Home Budget application!</b></p>
+<body>
+<main class="site-wrapper">
+    <div class="background"></div>
+    <div class="pt-table desktop-768">
+        <div class="pt-tablecell page-home relative" style="background-image:
+                url(https://media.istockphoto.com/photos/cooking-nd-seasoning-spices-border-on-black-slate-background-picture-id953140058?b=1&k=20&m=953140058&s=170667a&w=0&h=cFHmDfsARUpEkPd55UlMklVcXHs0dyRoENAQawCISr8=);
+                background-position: center;
+                background-size: cover;">
+<!--            <div class="overlay"></div>-->
 
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8">
+                        <div class="page-title home text-center">
+                            <span class="heading-page"> Home Budget</span>
+                            <h3 class="mt20">
+                                Welcome to the application, making your expenses management easier!
+                            </h3>
+                        </div>
 
-<div class="row">
-    <div class="col-sm-6">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Przejdź do listy kategorii wydatków</h5>
-                <p class="card-text">Aktualnie dodane kategorie</p>
-                <a href="#" th:href="@{/category/all}" class="btn btn-primary">Przejdź</a>
+                        <div class="hexagon-menu clear">
+                            <div class="hexagon-item">
+                                <div class="hex-item">
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div class="hex-item">
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <a href="#" th:href="@{/category/all}" class="hex-content">
+                                            <span class="hex-content-inner">
+                                                <span class="icon">
+                                                    <i class="fa fa-universal-access"></i>
+                                                </span>
+                                                <span class="title">Categories</span>
+                                            </span>
+                                    <svg viewBox="0 0 173.20508075688772 200" height="200" width="174" version="1.1"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M86.60254037844386 0L173.20508075688772 50L173.20508075688772 150L86.60254037844386 200L0 150L0 50Z"
+                                              fill="#1e2530"></path>
+                                    </svg>
+                                </a>
+                            </div>
+                            <div class="hexagon-item">
+                                <div class="hex-item">
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div class="hex-item">
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <a href="#" th:href="@{/expense/all}" class="hex-content">
+                                            <span class="hex-content-inner">
+                                                <span class="icon">
+                                                    <i class="fa fa-bullseye"></i>
+                                                </span>
+                                                <span class="title">Expenses</span>
+                                            </span>
+                                    <svg viewBox="0 0 173.20508075688772 200" height="200" width="174" version="1.1"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M86.60254037844386 0L173.20508075688772 50L173.20508075688772 150L86.60254037844386 200L0 150L0 50Z"
+                                              fill="#1e2530"></path>
+                                    </svg>
+                                </a>
+                            </div>
+                            <div class="hexagon-item">
+                                <div class="hex-item">
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div class="hex-item">
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <a href="#" th:href="@{/category/add}" class="hex-content">
+                                            <span class="hex-content-inner">
+                                                <span class="icon">
+                                                    <i class="fa fa-braille"></i>
+                                                </span>
+                                                <span class="title">Add new category</span>
+                                            </span>
+                                    <svg viewBox="0 0 173.20508075688772 200" height="200" width="174" version="1.1"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M86.60254037844386 0L173.20508075688772 50L173.20508075688772 150L86.60254037844386 200L0 150L0 50Z"
+                                              fill="#1e2530"></path>
+                                    </svg>
+                                </a>
+                            </div>
+                            <div class="hexagon-item">
+                                <div class="hex-item">
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div class="hex-item">
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <a href="#" th:href="@{/expense/add}" class="hex-content">
+                                            <span class="hex-content-inner">
+                                                <span class="icon">
+                                                    <i class="fa fa-id-badge"></i>
+                                                </span>
+                                                <span class="title">Add new expense</span>
+                                            </span>
+                                    <svg viewBox="0 0 173.20508075688772 200" height="200" width="174" version="1.1"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M86.60254037844386 0L173.20508075688772 50L173.20508075688772 150L86.60254037844386 200L0 150L0 50Z"
+                                              fill="#1e2530"></path>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <div class="col-sm-6">
-        <div class="card">
-            <div class="card-body">
-                <span class="border border-dark"></span>
-                <h5 class="card-title">Przejdź do listy wydatków</h5>
-                <p class="card-text">Ostatnio dodane wydatki</p>
-                <a href="#" th:href="@{/expense/all}" class="btn btn-primary">Przejdź</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<br>
-
-<div class="row">
-    <div class="col-sm-6">
-        <div class="card">
-            <div class="card-body">
-                <span class="border border-dark"></span>
-                <h5 class="card-title">Dodaj nową kategorię wydatków</h5>
-                <p class="card-text">Dodaje nową kategorię do istniejących</p>
-                <a href="#" th:href="@{/category/add}" class="btn btn-primary">Przejdź</a>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-6">
-        <div class="card">
-            <div class="card-body">
-                <span class="border border-dark"></span>
-                <h5 class="card-title">Dodaj nowy wydatek</h5>
-                <p class="card-text">Dodaje nowy wydatek, z przyporządkowaniem do kategorii</p>
-                <a href="#" th:href="@{/expense/add}" class="btn btn-primary">Przejdź</a>
-            </div>
-        </div>
-    </div>
-</div>
-
+</main>
 </body>
 </html>

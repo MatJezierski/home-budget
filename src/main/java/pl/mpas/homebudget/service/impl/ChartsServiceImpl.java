@@ -28,7 +28,7 @@ public class ChartsServiceImpl implements ChartsService {
     @Override
     public Map<String, BigDecimal> readCategoriesOverAmounts() {
 
-        List<Expense> allExpenses = expenseService.readallExpenses();
+        List<Expense> allExpenses = expenseService.readAllExpenses();
         Map<String, BigDecimal> result = new LinkedHashMap<>();
 
         for (Expense expense: allExpenses) {

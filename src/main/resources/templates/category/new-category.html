@@ -1,38 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <!-- Required meta tags-->
     <meta charset="UTF-8">
-    <title th:text="${operationTitle} + ' expense category'">Expense category</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Colorlib Templates">
+    <meta name="author" content="Colorlib">
+    <meta name="keywords" content="Colorlib Templates">
 
-    <link type="text/css"
-          rel="stylesheet"
-          th:href="@{/assets/category-style.css}"/>
+    <!-- Title Page-->
+    <title>Add new category of expenses</title>
 
-    <link type="text/css"
-          rel="stylesheet"
-          th:href="@{/assets/add-category-style.css}"/>
+    <!-- Icons font CSS-->
+    <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <!-- Font special for pages-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
 
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <link href="https://fonts.googleapis.com/css?family=Oleo+Script:400,700" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Teko:400,700" rel="stylesheet">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Vendor CSS-->
+    <link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
 
+    <!-- Main CSS-->
+    <link rel="stylesheet" th:href="@{/css/main.css}" media="all">
 </head>
 
 <body>
-<p th:text="${mainParagraph} + ' expense category'"><b>Expense category</b></p>
+<div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
+    <div class="wrapper wrapper--w790">
+        <div class="card card-5">
+            <div class="card-heading">
+                <h2 class="title">New Category Form</h2>
+            </div>
+            <div class="card-body">
+                <form action="#" th:action="@{/category/save}" th:object="${newCategory}" method="POST">
+                    <input type="hidden" th:field="*{id}"/>
+                    <div class="form-row m-b-55">
+                        <div class="name">Name</div>
+                        <div class="value">
+                            <div class="row row-space">
+                                <div class="col-2">
+                                    <div class="input-group-desc">
+                                        <input class="input--style-5" type="text" th:field="*{categoryName}" name="first_name">
+                                        <label class="label--desc">category name</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <button class="btn btn--radius-2 btn--green" name="pressed-button" value="Save" href="#" th:href="@{/category/all}" type="submit" th:align="left">
+                            <a>Save</a>
+                        </button>
+                        <a class="btn btn--radius-2 btn--red" href="#" th:href="@{/home}" role="button" th:align="center">
+                            Main page
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <form action="#" th:action="@{/category/save}" th:object="${newCategory}" method="post">
-        <input type="hidden" th:field="*{id}"/>
-        <p>Category name: <input type="text" th:field="*{categoryName}"/></p>
+<!-- Jquery JS-->
+<script src="vendor/jquery/jquery.min.js"></script>
+<!-- Vendor JS-->
+<script src="vendor/select2/select2.min.js"></script>
+<script src="vendor/datepicker/moment.min.js"></script>
+<script src="vendor/datepicker/daterangepicker.js"></script>
 
-        <p>
-            <input type="submit" name="pressed-button" value="Save">
-            <a class="btn btn-sm btn-success" href="#" th:href="@{/home}" role="button">Main page</a>
-            <input type="reset" value="Reset"/>
-        </p>
-    </form>
+<!-- Main JS-->
+<script src="js/global.js"></script>
 
 </body>
 

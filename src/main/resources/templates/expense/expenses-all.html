@@ -3,7 +3,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title><b>All lately expenses</b></title>
+    <title>All lately expenses</title>
 
     <link type="text/css"
           rel="stylesheet"
@@ -11,19 +11,19 @@
 
     <link type="text/css"
           rel="stylesheet"
-          th:href="@{/assets/add-category-style.css}"/>
+          th:href="@{/assets/add-expense-style.css}"/>
 
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link href="https://fonts.googleapis.com/css?family=Oleo+Script:400,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Teko:400,700" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-
-
 </head>
 <body>
-<h2> All your expenses </h2>
-        <table>
-            <thead>
+<h2 class="h2" th:align="center"> All your current expenses </h2>
+<br>
+<br>
+        <table class="table table-striped">
+            <thead class="thead-dark">
             <tr>
                 <th>Expense Title</th>
                 <th>Amount</th>
@@ -37,23 +37,26 @@
             </thead>
 
             <tbody>
-            <tr th:each="expense : ${expenses}">
-                <td th:text="${expense.expenseTitle}">Kawa</td>
-                <td th:text="${expense.expenseAmount}">100</td>
-                <td th:text="${expense.method}">Karta</td>
-                <td th:text="${expense.category}">Jedzenie</td>
-                <td th:text="${expense.expensePlace}">Warszawa</td>
-                <td th:text="${#temporals.format(expense.creationDateTime, 'dd-MM-yyyy HH:mm')}">Today</td>
-                <td><a th:href="@{'/category/edit/' + ${expense.id}}">Edit</a></td>
-                <td><a th:href="@{'/category/delete-confirmation/' + ${expense.id}}">Delete</a></td>
-            </tr>
+                <tr th:each="expense : ${expenses}">
+                    <td th:text="${expense.expenseTitle}">Kawa</td>
+                    <td th:text="${expense.expenseAmount}">100</td>
+                    <td th:text="${expense.method}">Karta</td>
+                    <td th:text="${expense.category}">Jedzenie</td>
+                    <td th:text="${expense.expensePlace}">Warszawa</td>
+                    <td th:text="${#temporals.format(expense.creationDateTime, 'dd-MM-yyyy HH:mm')}">Today</td>
+                    <td><a class="btn btn-sm btn-success" th:href="@{'/expense/edit/' + ${expense.id}}">Edit</a></td>
+                    <td><a class="btn btn-sm btn-danger " th:href="@{'/expense/delete-confirmation/' + ${expense.id}}">Delete</a></td>
+                </tr>
             </tbody>
         </table>
     <br><br>
-    <a class="btn btn-sm btn-success" href="#" th:href="@{/expense/add}" role="button">Add new expense</a>
     <br><br>
-    <a class="btn btn-sm btn-success" href="#" th:href="@{/home}" role="button">Main page</a>
-</table>
+    <a class="btn btn--radius-2 btn--green" href="#" th:href="@{/expense/add}" role="button" th:align="left">
+        Add new expense
+    </a>
+    <a class="btn btn--radius-2 btn--red" href="#" th:href="@{/home}" role="button" th:align="center">
+        Main page
+    </a>
 
 </body>
 </html>

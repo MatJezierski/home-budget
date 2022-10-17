@@ -8,9 +8,9 @@ import java.util.Optional;
 
 public interface ExpenseService {
 
-    List<Expense> readallExpenses();
+    List<Expense> readAllExpenses();
 
-    boolean saveExpense(Expense expense);
+    void saveExpense(Expense theExpense);
 
     Optional<Expense> findExpenseById(Long id);
 

@@ -1,22 +1,21 @@
 package pl.mpas.homebudget.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "Expanse_Category")
+@Table(name = "Expense_Category")
 public class ExpenseCategory {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private LocalDateTime creationDateTime;
-
+    @NotBlank(message = "Name of the category is mandatory!")
     private String categoryName;
+
+    private LocalDateTime creationDateTime;
 
     private boolean deleted;
 

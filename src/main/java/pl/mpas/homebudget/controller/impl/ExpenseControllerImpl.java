@@ -20,8 +20,8 @@ public class ExpenseControllerImpl implements ExpenseController {
 
     private static final Logger logger = LoggerFactory.getLogger(ExpenseControllerImpl.class);
 
-    private ExpenseService expenseService;
-    private ExpenseCategoryService categoryService;
+    private final ExpenseService expenseService;
+    private final ExpenseCategoryService categoryService;
 
     @Autowired
     public ExpenseControllerImpl(ExpenseService expenseService, ExpenseCategoryService categoryService){
@@ -33,22 +33,16 @@ public class ExpenseControllerImpl implements ExpenseController {
     public String allExpenses(Model expenses) {
 
         logger.info("showAllExpenses()");
-        List<Expense> expensesList = expenseService.readallExpenses();
+        List<Expense> expensesList = expenseService.readAllExpenses();
         expenses.addAttribute("expenses", expensesList);
 
         return "expense/expenses-all";
     }
 
     @PostMapping("/expense/save")
-    public String saveExpense(@ModelAttribute Expense expenseTitle,
-                              @RequestParam(name = "pressed-button") String pushedButton) {
-
-        logger.info("saveExpense(), expenseTitle: {}, pushedButton: ()", expenseTitle, pushedButton);
-
-        if ("save".equalsIgnoreCase(pushedButton)) {
-            expenseService.saveExpense(expenseTitle);
-        }
-
+    public String saveExpense(@ModelAttribute("expense") Expense theExpense) {
+        logger.info("saveExpense(), expenseTitle: {}", theExpense);
+        expenseService.saveExpense(theExpense);
         return "redirect:/expense/all";
     }
 
@@ -66,7 +60,7 @@ public class ExpenseControllerImpl implements ExpenseController {
 
     @GetMapping("/expense/edit/{id}")
     public String editExpense(@PathVariable Long id, Model model){
-        logger.info("editExpense(), id: ()", id);
+        logger.info("editExpense(), id: {}", id);
 
         model.addAttribute("operationTitle", "Edit");
         model.addAttribute("mainParagraph", "Edit");
@@ -78,20 +72,22 @@ public class ExpenseControllerImpl implements ExpenseController {
     }
 
     @GetMapping("/expense/delete-confirmation/{id}")
-    public String deleteConfirmation(@PathVariable Long id, Model model) {
-        logger.info("deleteExpense(), id: ()", id);
+    public String expenseDeleteConfirmation(@PathVariable Long id, Model model) {
+        logger.info("Deleting confirmation for expense with id: {}", id);
 
-        Optional<Expense> expenseToAsk = expenseService.findExpenseById(id);
-        expenseToAsk.ifPresent(expense -> model.addAttribute("expenseToAsk", expense));
+        expenseService.findExpenseById(id)
+                .ifPresent(expense -> model.addAttribute("expenseToAsk", expense));
 
         model.addAttribute("operationTitle", "Delete");
 
         return "expense/delete-confirmation";
     }
 
-    public String deleteExpense(Model removedExpense) {
-
-        return "redirect:/newExpense/all";
+    @GetMapping("/expense/delete/{id}")
+    public String deleteExpense(@PathVariable Long id) {
+        logger.info("deleteExpense(), id: {}", id);
+       expenseService.deleteExpenseById(id);
+        return "redirect:/expense/all";
     }
 
     public String showChart(Model chart) {

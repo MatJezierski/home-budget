@@ -17,6 +17,6 @@
 <body>
 <h2>Do you really want to delete</h2>
 <h2 th:text="${expenseToAsk.expenseTitle} + '?'">category</h2>
-<a th:href="@{'/category/delete/' + ${expenseToAsk.id}}">Yes</a>&nbsp;&nbsp;<a th:href="@{/expense/all}">No</a>
+<a th:href="@{'/expense/delete/' + ${expenseToAsk.id}}">Yes</a>&nbsp;&nbsp;<a th:href="@{/expense/all}">No</a>
 </body>
 </html>
