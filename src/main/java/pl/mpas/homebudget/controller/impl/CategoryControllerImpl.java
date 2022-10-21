@@ -31,11 +31,9 @@ public class CategoryControllerImpl implements CategoryController {
 
     @GetMapping("/category/all")
     public String allCategories(Model categories) { //Model categories - klasa Model z pakietu Springa
-
         logger.info("showAllCategories()");
         List<ExpenseCategory> expenseCategories = categoryService.readAllExpenseCategories();
         categories.addAttribute("categories", expenseCategories);
-
         return "category/categories-all";
     }
 
@@ -47,10 +45,10 @@ public class CategoryControllerImpl implements CategoryController {
         logger.info("saveCategory(), expenseCategory: {}, pushedButton: {}",
                 expenseCategory, pushedButton);
 
-        if (result.hasErrors()){
+        if (result.hasErrors()) {
             model.addAttribute("expenseCategory", expenseCategory);
-            logger.info("Has errors = "+result.hasErrors());
-            for (FieldError err:result.getFieldErrors()){
+            logger.info("Has errors = " + result.hasErrors());
+            for (FieldError err : result.getFieldErrors()) {
                 System.out.println(err.getDefaultMessage()); // Output: must be greater than or equal to 10
             }
             return "errors/error";
@@ -101,10 +99,20 @@ public class CategoryControllerImpl implements CategoryController {
     }
 
     @GetMapping("/category/delete/{id}")
-    public String deleteCategory(@PathVariable Long id) {
+    public String deleteCategory(@PathVariable Long id, Model model) {
         logger.info("deleteCategory(), id: {}", id);
+        Optional<ExpenseCategory> categoryToAsk = categoryService.findCategoryById(id);
+        categoryToAsk.ifPresent(expenseCategory -> model.addAttribute("categoryToAsk", expenseCategory));
         categoryService.deleteCategoryById(id);
 
         return "redirect:/category/all";
     }
+//
+//    @GetMapping("/category/all/{id}")
+//    public String deleteCategoryById(@PathVariable Long id, Model model) {
+//        Optional<ExpenseCategory> categoryToAsk = categoryService.findCategoryById(id);
+//        categoryToAsk.ifPresent(expenseCategory -> model.addAttribute("categoryToAsk", expenseCategory));
+//        categoryService.deleteCategoryById(id);
+//        return "category/categories-all";
+//    }
 }

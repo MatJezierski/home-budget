@@ -333,7 +333,6 @@ textarea, label {
 }
 
 .background {
-    background-image: url(/templates/background-cooking.JPG);
     height: 10px;
     width: 10px;
     background-position: center;
@@ -341,10 +340,12 @@ textarea, label {
 }
 
 .page-home {
+    background-image: url(../images/background-cooking.JPG);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
     vertical-align: middle; }
+
 .page-home .overlay {
     background-color: rgba(14, 17, 24, 0.97);
 }
