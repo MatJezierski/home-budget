@@ -16,8 +16,5 @@ public enum PaymentMethod {
         return Arrays.stream(PaymentMethod.values())
                 .sorted(Comparator.comparing(Enum::toString))
                 .collect(Collectors.toList());
-
-        // Enum domyślnie implementuje interfejs Comparable
-
     }
 }

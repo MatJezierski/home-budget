@@ -15,13 +15,10 @@ import java.util.Map;
 
 @Service
 public class ChartsServiceImpl implements ChartsService {
-
     private static final Logger logger = LoggerFactory.getLogger(ChartsService.class);
-
-    private ExpenseService expenseService;
+    private final ExpenseService expenseService;
 
     public ChartsServiceImpl (ExpenseService expenseService) {
-
         this.expenseService = expenseService;
     }
 

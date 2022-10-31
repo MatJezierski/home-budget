@@ -12,9 +12,7 @@ import java.util.*;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
-
     private static final Logger logger = LoggerFactory.getLogger(CategoryServiceImpl.class);
-
     private final CategoryRepository dataRepository;
 
     @Autowired
@@ -24,20 +22,16 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public List<ExpenseCategory> readAllExpenseCategories() {
-
-        logger.info("readAllCategories: ");
-
         List<ExpenseCategory> categoriesResult = (List<ExpenseCategory>) dataRepository.findAll();
-        Collections.sort(categoriesResult, Comparator.comparing(ExpenseCategory::getCategoryName));
-        logger.info("Sorted categories read from dao: {}", categoriesResult);
-
+        categoriesResult.sort(Comparator.comparing(ExpenseCategory::getCategoryName));
+        logger.info("Sorted categories read from dao: \n{}", categoriesResult);
         return categoriesResult;
     }
 
     @Override
     public boolean saveCategory(ExpenseCategory expenseCategory) {
-        ExpenseCategory savedCategory = dataRepository.save(expenseCategory);
-        return null != savedCategory.getId();
+        ExpenseCategory categoryToSave = dataRepository.save(expenseCategory);
+        return null != categoryToSave.getId();
     }
 
     @Override

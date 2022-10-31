@@ -1,20 +1,19 @@
 package pl.mpas.homebudget.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import org.apache.commons.lang3.builder.ToStringExclude;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "expense")
 public class Expense {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @NotNull(message = "This field can not be empty!")
@@ -25,14 +24,16 @@ public class Expense {
     private LocalDateTime creationDateTime;
 
     @NotNull(message = "This field can not be empty!")
-    private PaymentMethod method;
+    private PaymentMethod paymentMethod;
 
     private String expensePlace;
 
     @NotNull(message = "This field can not be empty!")
     private BigDecimal expenseAmount;
 
-    @OneToOne
+    @ToStringExclude
+    @ManyToOne(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
+    @JoinColumn(name = "expense_category_id", nullable = false)
     private ExpenseCategory category;
 
     private LocalDate expenseDate;
@@ -40,15 +41,13 @@ public class Expense {
     private boolean deleted;
 
     public Expense() {
-
         creationDateTime = LocalDateTime.now();
     }
 
-    public Expense(String expenseTitle, PaymentMethod method, String expensePlace, BigDecimal expenseAmount,
+    public Expense(String expenseTitle, PaymentMethod paymentMethod, String expensePlace, BigDecimal expenseAmount,
                    ExpenseCategory category, LocalDate expenseDate, LocalDateTime creationDateTime, boolean deleted) {
-        //this.id = id;
         this.expenseTitle = expenseTitle;
-        this.method = method;
+        this.paymentMethod = paymentMethod;
         this.expensePlace = expensePlace;
         this.expenseAmount = expenseAmount;
         this.category = category;
@@ -73,12 +72,12 @@ public class Expense {
         this.expenseTitle = expenseTitle;
     }
 
-    public PaymentMethod getMethod() {
-        return method;
+    public PaymentMethod getPaymentMethod() {
+        return paymentMethod;
     }
 
-    public void setMethod(PaymentMethod method) {
-        this.method = method;
+    public void setPaymentMethod(PaymentMethod method) {
+        this.paymentMethod = method;
     }
 
     public String getExpensePlace() {
@@ -134,12 +133,12 @@ public class Expense {
         return "Expense{" +
                 "id=" + id +
                 ", expenseTitle='" + expenseTitle + '\'' +
-                ", method=" + method +
+                ", creationDateTime=" + creationDateTime +
+                ", paymentMethod=" + paymentMethod +
                 ", expensePlace='" + expensePlace + '\'' +
                 ", expenseAmount=" + expenseAmount +
                 ", category=" + category +
                 ", expenseDate=" + expenseDate +
-                ", creationDateTime=" + creationDateTime +
                 ", deleted=" + deleted +
                 '}';
     }

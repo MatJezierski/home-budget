@@ -1,11 +1,14 @@
 package pl.mpas.homebudget.domain;
 
+import org.apache.commons.lang3.builder.ToStringExclude;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
-@Table(name = "Expense_Category")
+@Table(name = "expense_category")
 public class ExpenseCategory {
 
     @Id
@@ -19,15 +22,19 @@ public class ExpenseCategory {
 
     private boolean deleted;
 
-    public ExpenseCategory() {
+    @ToStringExclude
+    @OneToMany(mappedBy = "category")
+    private Set<Expense> expenses;
 
+    public ExpenseCategory() {
         creationDateTime = LocalDateTime.now();
     }
 
-    public ExpenseCategory(LocalDateTime creationDateTime, String categoryName, boolean deleted) {
-        this.creationDateTime = creationDateTime;
+    public ExpenseCategory(String categoryName, LocalDateTime creationDateTime, boolean deleted, Set<Expense> expenses) {
         this.categoryName = categoryName;
+        this.creationDateTime = creationDateTime;
         this.deleted = deleted;
+        this.expenses = expenses;
     }
 
     public Long getId() {
@@ -62,13 +69,22 @@ public class ExpenseCategory {
         this.deleted = deleted;
     }
 
+    public Set<Expense> getExpenses() {
+        return expenses;
+    }
+
+    public void setExpenses(Set<Expense> expenses) {
+        this.expenses = expenses;
+    }
+
     @Override
     public String toString() {
         return "ExpenseCategory{" +
                 "id=" + id +
-                ", creationDateTime=" + creationDateTime +
                 ", categoryName='" + categoryName + '\'' +
+                ", creationDateTime=" + creationDateTime +
                 ", deleted=" + deleted +
+                ", expenses=" + expenses +
                 '}';
     }
 }

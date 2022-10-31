@@ -2,11 +2,12 @@
 <html lang="en">
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
     <title>All lately expenses</title>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link rel="stylesheet" th:href="@{/css/main.css}" media="all">
 </head>
 <body>
@@ -32,12 +33,12 @@
 
                 <tbody>
                 <tr th:each="expense : ${expenses}">
-                    <td th:text="${expense.expenseTitle}">Kawa</td>
-                    <td th:text="${expense.expenseAmount}">100</td>
-                    <td th:text="${expense.method}">Karta</td>
-                    <td th:text="${expense.category}">Jedzenie</td>
-                    <td th:text="${expense.expensePlace}">Warszawa</td>
-                    <td th:text="${#temporals.format(expense.creationDateTime, 'dd-MM-yyyy HH:mm')}">Today</td>
+                    <td th:text="${expense.expenseTitle}"></td>
+                    <td th:text="${expense.expenseAmount}"></td>
+                    <td th:text="${expense.paymentMethod.name()}"></td>
+                    <td th:text="${expense.category.categoryName}"></td>
+                    <td th:text="${expense.expensePlace}"></td>
+                    <td th:text="${#temporals.format(expense.creationDateTime, 'dd-MM-yyyy HH:mm')}"></td>
                     <td><a class="btn btn-sm btn-success" th:href="@{'/expense/edit/' + ${expense.id}}">Edit</a></td>
                     <td><a class="btn btn-sm btn-danger" th:href="@{'/expense/delete-confirmation/' + ${expense.id}}">Delete</a>
                     </td>

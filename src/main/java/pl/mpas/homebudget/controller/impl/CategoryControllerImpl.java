@@ -18,9 +18,7 @@ import java.util.Optional;
 
 @Controller
 public class CategoryControllerImpl implements CategoryController {
-
     private static final Logger logger = LoggerFactory.getLogger(CategoryControllerImpl.class);
-
     private final CategoryService categoryService;
 
     @Autowired
@@ -30,10 +28,11 @@ public class CategoryControllerImpl implements CategoryController {
 
 
     @GetMapping("/category/all")
-    public String allCategories(Model categories) { //Model categories - klasa Model z pakietu Springa
+    public String allCategories(Model categories) {
         logger.info("showAllCategories()");
         List<ExpenseCategory> expenseCategories = categoryService.readAllExpenseCategories();
         categories.addAttribute("categories", expenseCategories);
+
         return "category/categories-all";
     }
 
@@ -41,9 +40,7 @@ public class CategoryControllerImpl implements CategoryController {
     //TODO: to deal with duplicated values
     public String saveCategory(@Valid @ModelAttribute ExpenseCategory expenseCategory, BindingResult result, Model model,
                                @RequestParam(name = "pressed-button") String pushedButton) {
-
-        logger.info("saveCategory(), expenseCategory: {}, pushedButton: {}",
-                expenseCategory, pushedButton);
+        logger.info("expenseCategory: {}, pushedButton: {}", expenseCategory, pushedButton);
 
         if (result.hasErrors()) {
             model.addAttribute("expenseCategory", expenseCategory);
@@ -55,31 +52,26 @@ public class CategoryControllerImpl implements CategoryController {
         }
 
         if ("save".equalsIgnoreCase(pushedButton)) {
-            categoryService.saveCategory(expenseCategory); // jeśli "Save", to zapisz i dodaj do wszystkich kategorii
+            categoryService.saveCategory(expenseCategory);
         }
-        return "redirect:/category/all"; //jeśli "Cancel", to powróć do wszystkich kategorii
+
+        return "redirect:/category/all";
     }
 
     @GetMapping("/category/add")
-    public String addCategory(Model category) { //@ModelAttribute  - ta adnotacja Springa konwertuje
-        // tekst z formularza HTMLowego (np "dodaj kategorię") do obiektu w Javie, który następnie ląduje w tej metodzie addCategory().
-        logger.info("addCategory()");
-
+    public String addCategory(Model category) {
         category.addAttribute("operationTitle", "New");
         category.addAttribute("mainParagraph", "Add new");
         category.addAttribute("newCategory", new ExpenseCategory());
 
         return "category/new-category";
-
     }
 
     @GetMapping("/category/edit/{id}")
     public String editCategory(@PathVariable Long id, Model model) {
         logger.info("editCategory(), id: {}", id);
-
         model.addAttribute("operationTitle", "Edit");
         model.addAttribute("mainParagraph", "Edit");
-
         Optional<ExpenseCategory> foundCategory = categoryService.findCategoryById(id);
         foundCategory.ifPresent(expenseCategory -> model.addAttribute("newCategory", expenseCategory));
 
@@ -89,10 +81,8 @@ public class CategoryControllerImpl implements CategoryController {
     @GetMapping("/category/delete-confirmation/{id}")
     public String deleteConfirmation(@PathVariable Long id, Model model) {
         logger.info("deleteCategory(), id: {}", id);
-
         Optional<ExpenseCategory> categoryToAsk = categoryService.findCategoryById(id);
         categoryToAsk.ifPresent(expenseCategory -> model.addAttribute("categoryToAsk", expenseCategory));
-
         model.addAttribute("operationTitle", "Delete");
 
         return "category/delete-confirmation";
@@ -107,12 +97,4 @@ public class CategoryControllerImpl implements CategoryController {
 
         return "redirect:/category/all";
     }
-//
-//    @GetMapping("/category/all/{id}")
-//    public String deleteCategoryById(@PathVariable Long id, Model model) {
-//        Optional<ExpenseCategory> categoryToAsk = categoryService.findCategoryById(id);
-//        categoryToAsk.ifPresent(expenseCategory -> model.addAttribute("categoryToAsk", expenseCategory));
-//        categoryService.deleteCategoryById(id);
-//        return "category/categories-all";
-//    }
 }

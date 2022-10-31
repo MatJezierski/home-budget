@@ -13,11 +13,8 @@ import java.util.*;
 
 @Service
 public class ExpenseServiceImpl implements ExpenseService {
-
     private static final Logger logger = LoggerFactory.getLogger(ExpenseServiceImpl.class);
-
     private final ExpenseRepository expenseDao;
-
 
     @Autowired
     public ExpenseServiceImpl (ExpenseRepository expenseDao) {
@@ -26,10 +23,9 @@ public class ExpenseServiceImpl implements ExpenseService {
 
     @Override
     public List<Expense> readAllExpenses() {
-        logger.info("readAllExpenses()");
         List<Expense> expensesResult = (List<Expense>) expenseDao.findAll();
-        Collections.sort(expensesResult, Comparator.comparing(Expense::getExpenseTitle));
-        logger.info("Sorted expenses read from dao: {}", expensesResult);
+        expensesResult.sort(Comparator.comparing(Expense::getExpenseTitle));
+//        logger.info("Expenses from DAO, sorted by title: \n{}", expensesResult);
         return expensesResult;
     }
 
@@ -37,7 +33,7 @@ public class ExpenseServiceImpl implements ExpenseService {
     @Transactional
     public void saveExpense(Expense expense) {
         expenseDao.save(expense);
-        logger.info("Pomyślnie zapisano wydatek w Service.");
+        logger.info("New expense successfully saved: \n{}", expense);
     }
 
     @Override
@@ -47,10 +43,9 @@ public class ExpenseServiceImpl implements ExpenseService {
 
     @Override
     public List<Expense> findExpenseByAmount(double amount) {
-        logger.info("findExpenseByAmount()");
         List<Expense> expensesByAmount = (List<Expense>) expenseDao.findAll();
-        Collections.sort(expensesByAmount, Comparator.comparing(Expense::getExpenseAmount));
-        logger.info("Expenses sorted by amount, read from dao: {}", expensesByAmount);
+        expensesByAmount.sort(Comparator.comparing(Expense::getExpenseAmount));
+        logger.info("Expenses from DAO, sorted by amount: \n{}", expensesByAmount);
         return expensesByAmount;
     }
 
